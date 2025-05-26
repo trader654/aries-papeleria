@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¿Qué quieres hacer hoy?</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 20px; background-color: #f7f7f7; }
+    h1 { color: #333; }
+    .section { margin-top: 20px; }
+    .hidden { display: none; }
+    label, select, textarea, button { display: block; margin: 10px auto; padding: 10px; width: 80%; max-width: 400px; }
+    button { background-color: #007BFF; color: white; border: none; cursor: pointer; }
+    button:hover { background-color: #0056b3; }
+  </style>
+</head>
+<body>
+  <h1>¿Qué quieres hacer hoy?</h1>
+  <button onclick="mostrar('imprimir')">Imprimir</button>
+  <button onclick="mostrar('consultar')">Consultar artículos</button>
+
+  <div id="imprimir" class="section hidden">
+    <h2>Opciones de impresión</h2>
+    <label>
+      Tipo de impresión:
+      <select>
+        <option value="color">Color</option>
+        <option value="blanco_negro">Blanco y negro</option>
+      </select>
+    </label>
+    <label>
+      Tipo de papel:
+      <select>
+        <option value="bond">Bond</option>
+        <option value="fotografico">Fotográfico</option>
+        <option value="reciclado">Reciclado</option>
+      </select>
+    </label>
+    <label>
+      Tamaño:
+      <select>
+        <option value="carta">Carta</option>
+        <option value="oficio">Oficio</option>
+        <option value="a4">A4</option>
+      </select>
+    </label>
+  </div>
+
+  <div id="consultar" class="section hidden">
+    <h2>¿Qué artículo deseas consultar?</h2>
+    <textarea id="producto" placeholder="Escribe aquí el artículo..."></textarea>
+    <button onclick="enviarConsulta()">Consultar</button>
+  </div>
+
+  <script>
+    function mostrar(seccion) {
+      document.getElementById('imprimir').classList.add('hidden');
+      document.getElementById('consultar').classList.add('hidden');
+      document.getElementById(seccion).classList.remove('hidden');
+    }
+
+    function enviarConsulta() {
+      const producto = document.getElementById('producto').value;
+      if (producto.trim() === '') {
+        alert('Por favor, escribe el artículo que deseas consultar.');
+        return;
+      }
+      const telefono = '529981040547';
+      const mensaje = encodeURIComponent(`Hola, quisiera consultar si está disponible el siguiente artículo: ${producto}`);
+      window.open(`https://wa.me/${telefono}?text=${mensaje}`, '_blank');
+    }
+  </script>
+</body>
+</html>
